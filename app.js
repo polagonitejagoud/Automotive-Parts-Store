@@ -1,5 +1,8 @@
+require("dotenv").config();
 
 const express = require("express");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 const session = require("express-session");
 const path = require("path");
 
@@ -7,16 +10,57 @@ const path = require("path");
 const isLoggedIn =
 require("./middleware/authMiddleware");
 
+const isAdmin =
+require("./middleware/adminMiddleware");
+
 const app = express();
 
+// Parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Security headers
+app.use(
+    helmet({
+        contentSecurityPolicy: false
+    })
+);
+
+// Rate limiter
+const limiter = rateLimit({
+
+    windowMs: 15 * 60 * 1000,
+
+    max: 5000,
+
+    message: "Too many requests. Please try again later."
+
+});
+
+//app.use(limiter);
+app.use("/auth", limiter);
+// Session
 app.use(session({
-    secret: "automotive_store",
+
+    secret: process.env.SESSION_SECRET,
+
     resave: false,
-    saveUninitialized: false
+
+    saveUninitialized: false,
+
+    cookie: {
+
+        httpOnly: true,
+
+        maxAge: 1000 * 60 * 60,
+
+        sameSite: "strict"
+
+    }
+
 }));
+
+
 
 const authRoutes = require("./routes/authRoutes");
 
@@ -137,39 +181,40 @@ app.get("/profile-page", isLoggedIn, (req, res) => {
 
 });
 
-app.get("/admin-dashboard", isLoggedIn, (req, res) => {
+app.get("/admin-dashboard", isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "admin-dashboard.html"));
 });
 
-app.get("/add-product", isLoggedIn, (req, res) => {
+app.get("/add-product", isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "add-product.html"));
 });
 
-app.get("/customers-page", isLoggedIn, (req, res) => {
+app.get("/customers-page", isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "customers.html"));
 });
 
-app.get("/admin-orders", isLoggedIn, (req, res) => {
+app.get("/admin-orders", isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "admin-orders.html"));
 });
 
-app.get("/edit-product/:id", isLoggedIn, (req, res) => {
+
+app.get("/edit-product/:id",  isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "edit-product.html"));
 });
 
-app.get("/categories-page", isLoggedIn, (req, res) => {
+app.get("/categories-page",  isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "categories.html"));
 });
 
-app.get("/reports-page", isLoggedIn, (req, res) => {
+app.get("/reports-page",  isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "reports.html"));
 });
 
-app.get("/notifications-page", isLoggedIn, (req, res) => {
+app.get("/notifications-page",  isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "notifications.html"));
 });
 
-app.get("/settings-page", isLoggedIn, (req, res) => {
+app.get("/settings-page",  isAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "views", "settings.html"));
 });
 
