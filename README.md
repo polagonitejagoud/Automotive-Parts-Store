@@ -96,6 +96,252 @@ Automotive-Parts-Store
 ├── package-lock.json
 └── README.md
 ```
+## 🏗 System Architecture
+
+```
+                    +----------------------+
+                    |      Customer        |
+                    +----------+-----------+
+                               |
+                               |
+                               v
+                    +----------------------+
+                    |   Frontend (HTML,    |
+                    | CSS, Bootstrap, JS)  |
+                    +----------+-----------+
+                               |
+                      HTTP Requests
+                               |
+                               v
+                    +----------------------+
+                    | Express.js Routes    |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | Controllers / Logic  |
+                    +----------+-----------+
+                               |
+                               v
+                    +----------------------+
+                    | MySQL Database       |
+                    +----------------------+
+                               ^
+                               |
+                    +----------+-----------+
+                    | Admin Dashboard      |
+                    +----------------------+
+```
+## 🏛 MVC Architecture
+
+```
+               User Request
+                     |
+                     v
+             Express Router
+                     |
+        --------------------------
+        |                        |
+        v                        |
+     Controller                  |
+(Business Logic)                 |
+        |                        |
+        v                        |
+      MySQL Database             |
+        |                        |
+        v                        |
+     Controller                  |
+        |                        |
+        v                        |
+       Views (HTML)  <------------
+                     |
+                     v
+               User Browser
+```
+
+### Model
+
+- MySQL Database
+- Stores products, users, orders, wishlist, cart, categories, brands and models.
+
+### View
+
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+
+### Controller
+
+- Express.js Routes
+- Business Logic
+- Database Queries
+- Authentication
+## 🗄 Entity Relationship Diagram (ER Diagram)
+
+```
+             USERS
+------------------------------
+id (PK)
+name
+email
+password
+role
+phone
+address
+        |
+        |
+        | 1
+        |
+        | M
+        |
+------------------------------
+             ORDERS
+------------------------------
+id (PK)
+user_id (FK)
+total_amount
+status
+created_at
+        |
+        |
+        | 1
+        |
+        | M
+        |
+------------------------------
+          ORDER_ITEMS
+------------------------------
+id (PK)
+order_id (FK)
+product_id (FK)
+quantity
+price
+        |
+        |
+        | M
+        |
+        | 1
+        |
+------------------------------
+            PRODUCTS
+------------------------------
+id (PK)
+category_id (FK)
+brand_id (FK)
+model_id (FK)
+name
+price
+stock
+discount
+image
+vehicle_type
+        |
+        |
+        |
+        |
+------------------------------
+          CATEGORIES
+------------------------------
+id (PK)
+name
+
+------------------------------
+            BRANDS
+------------------------------
+id (PK)
+name
+
+------------------------------
+            MODELS
+------------------------------
+id (PK)
+brand_id (FK)
+name
+
+------------------------------
+            CART
+------------------------------
+id (PK)
+user_id (FK)
+product_id (FK)
+quantity
+
+------------------------------
+          WISHLIST
+------------------------------
+id (PK)
+user_id (FK)
+product_id (FK)
+```
+## 🔄 Customer Workflow
+
+```
+Register
+    │
+    ▼
+Login
+    │
+    ▼
+Browse Products
+    │
+    ▼
+Search / Filter Products
+    │
+    ▼
+View Product Details
+    │
+    ▼
+Add to Cart / Wishlist
+    │
+    ▼
+Checkout
+    │
+    ▼
+Enter Delivery Address
+    │
+    ▼
+Choose Payment Method
+    │
+    ▼
+Place Order
+    │
+    ▼
+Admin Approval
+    │
+    ▼
+Packing
+    │
+    ▼
+Shipping
+    │
+    ▼
+Delivered
+```
+## 👨‍💼 Admin Workflow
+
+```
+Admin Login
+      │
+      ▼
+Dashboard
+      │
+      ├────────► Manage Products
+      │
+      ├────────► Manage Categories
+      │
+      ├────────► Manage Customers
+      │
+      ├────────► View Orders
+      │
+      ├────────► Approve Orders
+      │
+      ├────────► Update Status
+      │
+      ├────────► Reports
+      │
+      └────────► Settings
+```
 
 ---
 
