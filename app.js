@@ -3,20 +3,45 @@ const express = require("express");
 const helmet = require("helmet");
 const session = require("express-session");
 const path = require("path");
-
+const rateLimit = require("express-rate-limit");
 
 const isLoggedIn =
 require("./middleware/authMiddleware");
 
 const app = express();
 app.use(helmet());
+const limiter = rateLimit({
+
+windowMs:15*60*1000,
+
+max:100,
+
+message:"Too many requests. Please try again later."
+
+});
+
+app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: "automotive_store",
-    resave: false,
-    saveUninitialized: false
+
+secret:"automotive_store",
+
+resave:false,
+
+saveUninitialized:false,
+
+cookie:{
+
+httpOnly:true,
+
+maxAge:1000*60*60,
+
+sameSite:"strict"
+
+}
+
 }));
 
 const authRoutes = require("./routes/authRoutes");
