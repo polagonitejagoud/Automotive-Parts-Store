@@ -2,16 +2,12 @@ require("dotenv").config();
 
 const express = require("express");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
 const session = require("express-session");
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 
-
-const isLoggedIn =
-require("./middleware/authMiddleware");
-
-const isAdmin =
-require("./middleware/adminMiddleware");
+const isLoggedIn = require("./middleware/authMiddleware");
+const isAdmin = require("./middleware/adminMiddleware");
 
 const app = express();
 
@@ -28,38 +24,25 @@ app.use(
 
 // Rate limiter
 const limiter = rateLimit({
-
     windowMs: 15 * 60 * 1000,
-
     max: 5000,
-
     message: "Too many requests. Please try again later."
-
 });
 
-//app.use(limiter);
+// Apply rate limiter only to authentication routes
 app.use("/auth", limiter);
+
 // Session
 app.use(session({
-
     secret: process.env.SESSION_SECRET,
-
     resave: false,
-
     saveUninitialized: false,
-
     cookie: {
-
         httpOnly: true,
-
         maxAge: 1000 * 60 * 60,
-
         sameSite: "strict"
-
     }
-
 }));
-
 
 
 const authRoutes = require("./routes/authRoutes");

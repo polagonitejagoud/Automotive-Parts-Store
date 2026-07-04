@@ -34,6 +34,29 @@ if (!password || password.length < 6) {
     return res.send("Password must contain at least 6 characters");
 }
 
+    
+
+    // Input Validation
+
+if (!name || name.trim() === "") {
+    return res.send("Name is required");
+}
+
+if (!email || email.trim() === "") {
+    return res.send("Email is required");
+}
+
+const emailRegex =
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(email)) {
+    return res.send("Invalid Email Address");
+}
+
+if (!password || password.length < 6) {
+    return res.send("Password must contain at least 6 characters");
+}
+
     try {
 
         const hashedPassword =
