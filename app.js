@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
 
-secret:"automotive_store",
+secret:process.env.SESSION_SECRET
 
 resave:false,
 
