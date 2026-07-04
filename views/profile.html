@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>My Profile</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<div class="card p-4">
+
+<h2 class="mb-4">
+
+My Profile
+
+</h2>
+
+<div class="mb-3">
+
+<label>Name</label>
+
+<input
+id="name"
+class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label>Email</label>
+
+<input
+id="email"
+class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label>Phone</label>
+
+<input
+id="phone"
+class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label>Address</label>
+
+<textarea
+id="address"
+class="form-control">
+
+</textarea>
+
+</div>
+
+<button
+class="btn btn-dark"
+onclick="saveProfile()">
+
+Save Changes
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+fetch("/auth/profile")
+
+.then(res=>res.json())
+
+.then(user=>{
+
+document.getElementById("name").value=user.name;
+
+document.getElementById("email").value=user.email;
+
+document.getElementById("phone").value=user.phone || "";
+
+document.getElementById("address").value=user.address || "";
+
+});
+
+function saveProfile(){
+
+fetch("/auth/profile/update",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+name:document.getElementById("name").value,
+
+email:document.getElementById("email").value,
+
+phone:document.getElementById("phone").value,
+
+address:document.getElementById("address").value
+
+})
+
+})
+
+.then(res=>res.text())
+
+.then(msg=>{
+
+alert(msg);
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

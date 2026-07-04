@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Product Details</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#C8CDD3;
+
+font-family:'Segoe UI',sans-serif;
+
+color:#111827;
+
+}
+
+/* NAVBAR */
+
+.custom-navbar{
+
+background:white;
+
+border-bottom:1px solid #ddd;
+
+padding:16px 0;
+
+}
+
+.navbar-brand{
+
+font-size:32px;
+
+font-weight:800;
+
+color:#111827!important;
+
+}
+
+/* CARD */
+
+.details-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:40px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+/* IMAGE */
+
+.product-image{
+
+width:100%;
+
+height:430px;
+
+object-fit:contain;
+
+background:white;
+
+border-radius:20px;
+
+}
+
+/* TEXT */
+
+.product-title{
+
+font-size:42px;
+
+font-weight:800;
+
+}
+
+.price{
+
+font-size:42px;
+
+font-weight:bold;
+
+color:#F59E0B;
+
+}
+
+.description{
+
+margin-top:20px;
+
+font-size:18px;
+
+line-height:1.8;
+
+color:#6B7280;
+
+}
+
+.stock{
+
+font-size:18px;
+
+font-weight:600;
+
+color:#16A34A;
+
+margin-top:15px;
+
+}
+
+.btn-dark{
+
+background:#111111;
+
+border:none;
+
+font-weight:bold;
+
+border-radius:10px;
+
+padding:12px;
+
+}
+
+.btn-dark:hover{
+
+background:#000;
+
+}
+
+.btn-outline-dark{
+
+border-radius:10px;
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar custom-navbar">
+
+<div class="container">
+
+<a class="navbar-brand" href="/products-page">
+
+🚗 Automotive Store
+
+</a>
+
+<a href="/products-page" class="btn btn-outline-dark">
+
+← Back to Products
+
+</a>
+
+</div>
+
+</nav>
+
+<div class="container py-5">
+
+<div id="productDetails"></div>
+
+</div>
+
+<script>
+
+const productId =
+window.location.pathname.split("/").pop();
+
+fetch("/products/" + productId)
+
+.then(res=>res.json())
+.then(product=>{
+
+const discount = Number(product.discount || 0);
+
+const discountedPrice =
+(
+Number(product.price) *
+(100-discount)/100
+).toFixed(2);
+
+let features = "";
+let reviews = "";
+
+switch(product.category_name){
+
+// ======================
+// FILTERS
+// ======================
+
+case "Filters":
+
+features = `
+<li>✔ High filtration efficiency.</li>
+<li>✔ Protects engine from dust and dirt.</li>
+<li>✔ Improves engine performance.</li>
+<li>✔ Enhances fuel efficiency.</li>
+<li>✔ OEM quality materials.</li>
+<li>✔ Long service life.</li>
+<li>✔ Easy installation.</li>
+<li>✔ Perfect fit for compatible vehicles.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Rahul Sharma</strong>
+<p class="mb-0">Engine runs much smoother after replacing the filter.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Anil Kumar</strong>
+<p class="mb-0">Perfect fitting and genuine product.</p>
+</div>
+`;
+break;
+
+// ======================
+// ENGINE PARTS
+// ======================
+
+case "Engine Parts":
+
+features = `
+<li>✔ OEM quality engine component.</li>
+<li>✔ Improves engine efficiency.</li>
+<li>✔ High temperature resistant.</li>
+<li>✔ Precision engineered.</li>
+<li>✔ Durable construction.</li>
+<li>✔ Smooth engine performance.</li>
+<li>✔ Long service life.</li>
+<li>✔ Easy installation.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Kiran</strong>
+<p class="mb-0">Very good quality. Engine performance improved.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Suresh</strong>
+<p class="mb-0">Worth every rupee.</p>
+</div>
+`;
+break;
+
+// ======================
+// BRAKE SYSTEM
+// ======================
+
+case "Brake System":
+
+features = `
+<li>✔ Superior braking performance.</li>
+<li>✔ Heat resistant.</li>
+<li>✔ Low braking noise.</li>
+<li>✔ High stopping power.</li>
+<li>✔ OEM specification.</li>
+<li>✔ Long brake life.</li>
+<li>✔ Smooth braking.</li>
+<li>✔ Safe for highway driving.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Vikram</strong>
+<p class="mb-0">Excellent braking performance.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Mahesh</strong>
+<p class="mb-0">Very safe and reliable.</p>
+</div>
+`;
+break;
+
+// ======================
+// ELECTRICAL
+// ======================
+
+case "Electrical":
+
+features = `
+<li>✔ Reliable electrical performance.</li>
+<li>✔ High efficiency.</li>
+<li>✔ Waterproof connectors.</li>
+<li>✔ Heat resistant.</li>
+<li>✔ Long operational life.</li>
+<li>✔ OEM quality.</li>
+<li>✔ Durable construction.</li>
+<li>✔ Easy installation.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Sai Krishna</strong>
+<p class="mb-0">Battery performance is excellent.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Rakesh</strong>
+<p class="mb-0">Original quality product.</p>
+</div>
+`;
+break;
+
+// ======================
+// LIGHTING
+// ======================
+
+case "Lighting":
+
+features = `
+<li>✔ High brightness.</li>
+<li>✔ Crystal clear visibility.</li>
+<li>✔ Waterproof design.</li>
+<li>✔ Long LED lifespan.</li>
+<li>✔ Low power consumption.</li>
+<li>✔ OEM fit.</li>
+<li>✔ Durable housing.</li>
+<li>✔ Perfect night visibility.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Ajay</strong>
+<p class="mb-0">Very bright headlights.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Harish</strong>
+<p class="mb-0">Night driving became much safer.</p>
+</div>
+`;
+break;
+
+// ======================
+// SUSPENSION
+// ======================
+
+case "Suspension":
+
+features = `
+<li>✔ Smooth ride quality.</li>
+<li>✔ Excellent shock absorption.</li>
+<li>✔ High durability.</li>
+<li>✔ Reduces road vibrations.</li>
+<li>✔ Improves handling.</li>
+<li>✔ OEM quality.</li>
+<li>✔ Easy installation.</li>
+<li>✔ Long service life.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Naresh</strong>
+<p class="mb-0">Ride comfort improved significantly.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Abhishek</strong>
+<p class="mb-0">Very smooth suspension.</p>
+</div>
+`;
+break;
+
+// ======================
+// COOLING SYSTEM
+// ======================
+
+case "Cooling System":
+
+features = `
+<li>✔ Prevents engine overheating.</li>
+<li>✔ Efficient coolant circulation.</li>
+<li>✔ Leak resistant.</li>
+<li>✔ Durable construction.</li>
+<li>✔ Corrosion resistant.</li>
+<li>✔ OEM quality.</li>
+<li>✔ Long lifespan.</li>
+<li>✔ Perfect compatibility.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Prakash</strong>
+<p class="mb-0">Cooling performance is excellent.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Lokesh</strong>
+<p class="mb-0">No overheating after installation.</p>
+</div>
+`;
+break;
+
+// ======================
+// TRANSMISSION
+// ======================
+
+case "Transmission":
+
+features = `
+<li>✔ Smooth gear shifting.</li>
+<li>✔ Precision engineered.</li>
+<li>✔ Heavy duty construction.</li>
+<li>✔ Long service life.</li>
+<li>✔ OEM quality.</li>
+<li>✔ Improved driving comfort.</li>
+<li>✔ Easy installation.</li>
+<li>✔ Reliable performance.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Rohit</strong>
+<p class="mb-0">Gear shifting became smoother.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Karthik</strong>
+<p class="mb-0">Very good transmission quality.</p>
+</div>
+`;
+break;
+
+// ======================
+// BODY PARTS
+// ======================
+
+case "Body Parts":
+
+features = `
+<li>✔ Premium finish.</li>
+<li>✔ Scratch resistant.</li>
+<li>✔ Rust resistant.</li>
+<li>✔ OEM fitting.</li>
+<li>✔ Strong build quality.</li>
+<li>✔ Long-lasting paint.</li>
+<li>✔ Stylish appearance.</li>
+<li>✔ Easy installation.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Ganesh</strong>
+<p class="mb-0">Perfect fitting and premium look.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Vamsi</strong>
+<p class="mb-0">Looks exactly like the original part.</p>
+</div>
+`;
+break;
+
+// ======================
+// ACCESSORIES
+// ======================
+
+case "Accessories":
+
+features = `
+<li>✔ Premium quality materials.</li>
+<li>✔ Stylish design.</li>
+<li>✔ Easy installation.</li>
+<li>✔ Durable finish.</li>
+<li>✔ Long-lasting.</li>
+<li>✔ OEM compatible.</li>
+<li>✔ Enhances vehicle appearance.</li>
+<li>✔ Value for money.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3 mb-3">
+★★★★★
+<strong>Teja</strong>
+<p class="mb-0">Excellent accessory with premium finish.</p>
+</div>
+
+<div class="border rounded p-3">
+★★★★★
+<strong>Sandeep</strong>
+<p class="mb-0">Looks amazing on my car.</p>
+</div>
+`;
+break;
+
+// ======================
+// DEFAULT
+// ======================
+
+default:
+
+features = `
+<li>✔ Genuine OEM replacement.</li>
+<li>✔ Premium quality.</li>
+<li>✔ High durability.</li>
+<li>✔ Easy installation.</li>
+<li>✔ Reliable performance.</li>
+<li>✔ Long service life.</li>
+<li>✔ Value for money.</li>
+<li>✔ Perfect fit.</li>
+`;
+
+reviews = `
+<div class="border rounded p-3">
+★★★★★
+<strong>Verified Buyer</strong>
+<p class="mb-0">Excellent product and fast delivery.</p>
+</div>
+`;
+
+}
+
+document.getElementById("productDetails").innerHTML=`
+
+<div class="details-card">
+
+<div class="row">
+
+<div class="col-lg-5 text-center">
+
+<img
+src="/uploads/${product.image}"
+class="product-image">
+
+</div>
+
+<div class="col-lg-7">
+
+<h1 class="product-title">
+
+${product.name}
+
+</h1>
+
+${
+discount>0
+?
+
+`<span class="badge bg-danger fs-6">
+
+${discount}% OFF
+
+</span>`
+
+:""
+
+}
+
+<div class="mt-3">
+
+${
+discount>0
+?
+
+`
+
+<h2 class="text-success fw-bold">
+
+₹${discountedPrice}
+
+</h2>
+
+<h4>
+
+<del class="text-secondary">
+
+₹${Number(product.price).toLocaleString()}
+
+</del>
+
+</h4>
+
+`
+
+:
+
+`
+
+<div class="price">
+
+₹${Number(product.price).toLocaleString()}
+
+</div>
+
+`
+
+}
+
+</div>
+
+<div class="stock mt-3">
+
+✔ In Stock (${product.stock})
+
+</div>
+
+<p class="description">
+
+${product.description}
+
+</p>
+
+<hr>
+
+<h4>
+
+⭐ Product Highlights
+
+</h4>
+
+<ul class="mt-3">
+
+${features}
+
+</ul>
+
+<hr>
+
+<h4>
+
+📋 Specifications
+
+</h4>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Brand</th>
+
+<td>${product.brand_name || "OEM"}</td>
+
+</tr>
+
+<tr>
+
+<th>Category</th>
+
+<td>${product.category_name || "-"}</td>
+
+</tr>
+
+<tr>
+
+<th>Vehicle</th>
+
+<td>${product.vehicle_type}</td>
+
+</tr>
+
+<tr>
+
+<th>Warranty</th>
+
+<td>12 Months</td>
+
+</tr>
+
+<tr>
+
+<th>Delivery</th>
+
+<td>2-5 Business Days</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h4>
+
+⭐ Customer Rating
+
+</h4>
+
+<h5 class="text-warning">
+
+★★★★★ 4.8/5
+
+</h5>
+
+<p>
+
+Based on 275+ verified customer reviews.
+
+</p>
+
+<hr>
+
+<h4>
+
+💬 Customer Reviews
+
+</h4>
+${reviews}
+
+<div class="d-grid gap-3 mt-4">
+
+<button
+class="btn btn-dark btn-lg"
+onclick="addToCart(${product.id})">
+
+🛒 Add To Cart
+
+</button>
+
+<button
+class="btn btn-outline-dark btn-lg"
+onclick="addToWishlist(${product.id})">
+
+❤️ Add To Wishlist
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+/* ADD TO CART */
+
+function addToCart(productId){
+
+fetch("/cart/add",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+product_id:productId
+
+})
+
+})
+
+.then(res=>res.text())
+
+.then(msg=>{
+
+alert(msg);
+
+});
+
+}
+
+/* ADD TO WISHLIST */
+
+function addToWishlist(productId){
+
+fetch("/wishlist/add",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+product_id:productId
+
+})
+
+})
+
+.then(res=>res.text())
+
+.then(msg=>{
+
+alert(msg);
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>

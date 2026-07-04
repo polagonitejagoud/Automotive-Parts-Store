@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Track Order</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+background:#C8CDD3;
+
+color:#111827;
+
+overflow-x:hidden;
+
+}
+
+/* NAVBAR */
+
+.custom-navbar{
+
+background:white;
+
+padding:18px 0;
+
+border-bottom:1px solid #E5E7EB;
+
+}
+
+.navbar-brand{
+
+font-size:34px;
+
+font-weight:800;
+
+color:#111827!important;
+
+}
+
+.search-wrapper{
+
+position:relative;
+
+width:420px;
+
+}
+
+.search-wrapper input{
+
+height:46px;
+
+padding-left:45px;
+
+border-radius:30px;
+
+border:1px solid #D1D5DB;
+
+}
+
+.search-wrapper i{
+
+position:absolute;
+
+left:18px;
+
+top:15px;
+
+color:#777;
+
+}
+
+.icon-box{
+
+position:relative;
+
+font-size:24px;
+
+cursor:pointer;
+
+margin-left:30px;
+
+}
+
+.badge-count{
+
+position:absolute;
+
+top:-8px;
+
+right:-10px;
+
+background:#111111;
+
+color:white;
+
+width:20px;
+
+height:20px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+font-size:11px;
+
+}
+
+/* CHECKOUT STEPS */
+
+.checkout-progress{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:10px;
+
+margin:45px 0;
+
+flex-wrap:wrap;
+
+}
+
+.step{
+
+background:white;
+
+padding:12px 24px;
+
+border-radius:30px;
+
+font-weight:600;
+
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+.step.done{
+
+background:#16A34A;
+
+color:white;
+
+}
+
+.step.active{
+
+background:#F59E0B;
+
+color:white;
+
+}
+
+.line{
+
+width:60px;
+
+height:4px;
+
+background:#16A34A;
+
+border-radius:20px;
+
+}
+
+/* CARD */
+
+.glass-card{
+
+background:white;
+
+border-radius:22px;
+
+padding:35px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+margin-bottom:35px;
+
+}
+
+/* SUCCESS */
+
+.success-icon{
+
+width:110px;
+
+height:110px;
+
+margin:auto;
+
+border-radius:50%;
+
+background:#16A34A;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:55px;
+
+color:white;
+
+box-shadow:0 10px 30px rgba(22,163,74,.3);
+
+}
+
+/* TRUCK */
+
+.road{
+
+height:130px;
+
+background:#F3F4F6;
+
+border-radius:18px;
+
+overflow:hidden;
+
+position:relative;
+
+margin:40px 0;
+
+}
+
+.truck{
+
+position:absolute;
+
+font-size:55px;
+
+top:35px;
+
+animation:truckMove 7s linear infinite;
+
+}
+
+@keyframes truckMove{
+
+0%{left:-80px;}
+
+100%{left:100%;}
+
+}
+/* ===========================
+        STATUS CARD
+=========================== */
+
+.status{
+
+background:#F9FAFB;
+
+border-left:6px solid #E5E7EB;
+
+padding:18px 22px;
+
+border-radius:12px;
+
+margin-bottom:18px;
+
+font-size:18px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.status.done{
+
+border-left-color:#16A34A;
+
+background:#ECFDF5;
+
+}
+
+.status.active{
+
+border-left-color:#F59E0B;
+
+background:#FFF7ED;
+
+}
+
+/* INFO */
+
+.info-box{
+
+background:#F9FAFB;
+
+padding:20px;
+
+border-radius:15px;
+
+margin-top:20px;
+
+}
+
+.black-btn{
+
+background:#111111;
+
+color:white;
+
+border:none;
+
+font-weight:600;
+
+padding:12px;
+
+border-radius:10px;
+
+}
+
+.black-btn:hover{
+
+background:black;
+
+color:white;
+
+}
+
+.orange-btn{
+
+background:#F59E0B;
+
+color:black;
+
+border:none;
+
+font-weight:700;
+
+padding:12px;
+
+border-radius:10px;
+
+}
+
+.orange-btn:hover{
+
+background:#FFB020;
+
+}
+
+.footer{
+
+background:#111827;
+
+color:white;
+
+padding:60px 0;
+
+margin-top:70px;
+
+}
+
+.footer p{
+
+color:#D1D5DB;
+
+}
+
+.footer a{
+
+color:#D1D5DB;
+
+text-decoration:none;
+
+}
+
+.footer a:hover{
+
+color:#F59E0B;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+<div class="container">
+
+<a
+class="navbar-brand"
+href="/products-page">
+
+🚗 Automotive Store
+
+</a>
+
+<div class="search-wrapper">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+class="form-control"
+placeholder="Search products...">
+
+</div>
+
+<div class="d-flex align-items-center">
+
+<div
+class="icon-box"
+onclick="location.href='/wishlist-page'">
+
+❤️
+
+<span
+id="wishlistCount"
+class="badge-count">
+
+0
+
+</span>
+
+</div>
+
+<div
+class="icon-box"
+onclick="location.href='/cart-page'">
+
+🛒
+
+<span
+id="cartCount"
+class="badge-count">
+
+0
+
+</span>
+
+</div>
+
+<div class="dropdown ms-4">
+
+<button
+class="btn btn-dark dropdown-toggle"
+data-bs-toggle="dropdown">
+
+👤 Account
+
+</button>
+
+<ul class="dropdown-menu dropdown-menu-end">
+
+<li><a class="dropdown-item" href="/products-page">Products</a></li>
+
+<li><a class="dropdown-item" href="/orders-page">Orders</a></li>
+
+<li><a class="dropdown-item" href="/wishlist-page">Wishlist</a></li>
+
+<li><a class="dropdown-item" href="/logout">Logout</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="checkout-progress">
+
+<div class="step done">
+
+🛒 Cart
+
+</div>
+
+<div class="line"></div>
+
+<div class="step done">
+
+📍 Address
+
+</div>
+
+<div class="line"></div>
+
+<div class="step done">
+
+💳 Payment
+
+</div>
+
+<div class="line"></div>
+
+<div class="step active">
+
+🚚 Tracking
+
+</div>
+
+</div>
+
+<div class="glass-card text-center">
+
+<div class="success-icon">
+
+📦
+
+</div>
+
+<h1 class="mt-4 fw-bold">
+
+Your Order is On The Way
+
+</h1>
+
+<p class="text-muted">
+
+Track your shipment in real time.
+
+</p>
+
+<h4>
+
+Order ID:
+<span id="orderId">
+
+#AS12874
+
+</span>
+
+</h4>
+
+</div>
+
+<div class="road">
+
+<div class="truck">
+
+🚚
+
+</div>
+
+</div>
+
+<!-- Part 3 Starts Here -->
+<div class="glass-card">
+
+<h2 class="mb-4">
+
+🚚 Live Order Tracking
+
+</h2>
+
+<div id="trackingStatus">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Part 4 Starts Here -->
+ <!-- ===========================
+        FOOTER
+=========================== -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4 mb-4">
+
+<h3>
+
+🚗 Automotive Store
+
+</h3>
+
+<p>
+
+Premium Automotive Parts for Cars & Motorcycles.
+
+</p>
+
+<p>
+
+Performance • Reliability • Quality
+
+</p>
+
+</div>
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<p>
+
+<a href="/products-page">
+
+Products
+
+</a>
+
+</p>
+
+<p>
+
+<a href="/cart-page">
+
+Cart
+
+</a>
+
+</p>
+
+<p>
+
+<a href="/wishlist-page">
+
+Wishlist
+
+</a>
+
+</p>
+
+<p>
+
+<a href="/orders-page">
+
+Orders
+
+</a>
+
+</p>
+
+</div>
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Customer Support
+
+</h5>
+
+<p>
+
+📍 Hyderabad, India
+
+</p>
+
+<p>
+
+📞 +91 9876543210
+
+</p>
+
+<p>
+
+✉ support@automotivestore.com
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="text-center mb-0">
+
+© 2026 Automotive Store. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<script>
+
+/* ===========================
+        LOAD COUNTERS
+=========================== */
+
+loadWishlistCount();
+loadCartCount();
+
+function loadWishlistCount(){
+
+    fetch("/wishlist")
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        document.getElementById("wishlistCount").innerText =
+        data.length;
+
+    });
+
+}
+
+function loadCartCount(){
+
+    fetch("/cart")
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        let count = 0;
+
+        data.forEach(item=>{
+
+            count += Number(item.quantity);
+
+        });
+
+        document.getElementById("cartCount").innerText =
+        count;
+
+    });
+
+}
+
+/* ===========================
+        RANDOM ORDER ID
+=========================== */
+
+const orderNo =
+"AS" +
+
+Math.floor(
+100000 + Math.random()*900000
+);
+
+document.getElementById("orderId").innerText =
+"#" + orderNo;
+
+const params = new URLSearchParams(window.location.search);
+
+const orderId = params.get("order");
+
+if(orderId){
+
+    document.getElementById("orderId").innerText =
+    "#AS"+orderId;
+
+    fetch("/orders/"+orderId)
+
+    .then(res=>res.json())
+
+    .then(order=>{
+
+        let html="";
+
+        if(order.status=="Pending"){
+
+            html=`
+
+            <div class="status active">
+
+                <div class="d-flex justify-content-between">
+
+                    <div>
+
+                        <h5>⏳ Pending Approval</h5>
+
+                        <p class="mb-0">
+
+                        Waiting for admin approval.
+
+                        </p>
+
+                    </div>
+
+                    <span class="text-warning fw-bold">
+
+                    Pending
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="status">
+
+                <h5>📦 Packed</h5>
+
+            </div>
+
+            <div class="status">
+
+                <h5>🚚 Shipped</h5>
+
+            </div>
+
+            <div class="status">
+
+                <h5>🏠 Delivered</h5>
+
+            </div>
+
+            `;
+
+        }
+
+        else if(order.status=="Approved"){
+
+            html=`
+
+            <div class="status done">
+
+                <h5>✔ Order Approved</h5>
+
+            </div>
+
+            <div class="status active">
+
+                <h5>📦 Packing Your Order</h5>
+
+            </div>
+
+            <div class="status">
+
+                <h5>🚚 Shipped</h5>
+
+            </div>
+
+            <div class="status">
+
+                <h5>🏠 Delivered</h5>
+
+            </div>
+
+            `;
+
+        }
+
+        else if(order.status=="Packed"){
+
+            html=`
+
+            <div class="status done">
+
+                <h5>✔ Order Approved</h5>
+
+            </div>
+
+            <div class="status done">
+
+                <h5>📦 Packed</h5>
+
+            </div>
+
+            <div class="status active">
+
+                <h5>🚚 Ready To Ship</h5>
+
+            </div>
+
+            <div class="status">
+
+                <h5>🏠 Delivered</h5>
+
+            </div>
+
+            `;
+
+        }
+
+        else if(order.status=="Shipped"){
+
+            html=`
+
+            <div class="status done">
+
+                <h5>✔ Order Approved</h5>
+
+            </div>
+
+            <div class="status done">
+
+                <h5>📦 Packed</h5>
+
+            </div>
+
+            <div class="status done">
+
+                <h5>🚚 Shipped</h5>
+
+            </div>
+
+            <div class="status active">
+
+                <h5>🏠 Out For Delivery</h5>
+
+            </div>
+
+            `;
+
+        }
+
+        else if(order.status=="Delivered"){
+
+            html=`
+
+            <div class="status done">
+
+                <h5>✔ Order Approved</h5>
+
+            </div>
+
+            <div class="status done">
+
+                <h5>📦 Packed</h5>
+
+            </div>
+
+            <div class="status done">
+
+                <h5>🚚 Shipped</h5>
+
+            </div>
+
+            <div class="status done">
+
+                <h5>🏠 Delivered</h5>
+
+            </div>
+
+            `;
+
+        }
+
+        else{
+
+            html=`
+
+            <div class="status">
+
+                <h5 style="color:red;">
+
+                ❌ Order Cancelled
+
+                </h5>
+
+            </div>
+
+            `;
+
+        }
+
+        document.getElementById("trackingStatus").innerHTML=html;
+
+    });
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

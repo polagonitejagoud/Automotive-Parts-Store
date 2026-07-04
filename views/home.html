@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Automotive Store</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Segoe UI',sans-serif;
+
+    background:#C8CDD3;
+
+    color:#111827;
+
+    overflow-x:hidden;
+
+}
+
+/* ===========================
+NAVBAR
+=========================== */
+
+.custom-navbar{
+
+    background:#ffffff;
+
+    border-bottom:1px solid #E5E7EB;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.navbar-brand{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#111827!important;
+
+}
+
+.nav-link{
+
+    color:#111827!important;
+
+    font-weight:600;
+
+    margin-right:15px;
+
+    transition:.3s;
+
+}
+
+.nav-link:hover{
+
+    color:#F59E0B!important;
+
+}
+
+.search-box{
+
+    width:320px;
+
+    border-radius:30px;
+
+}
+
+.icon-btn{
+
+    font-size:22px;
+
+    color:#111827;
+
+    margin-left:18px;
+
+    text-decoration:none;
+
+}
+
+.icon-btn:hover{
+
+    color:#F59E0B;
+
+}
+
+.logout-btn{
+
+    background:#111827;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:8px 18px;
+
+    margin-left:20px;
+
+    font-weight:600;
+
+}
+
+.logout-btn:hover{
+
+    background:black;
+
+    color:white;
+
+}
+
+/* ===========================
+HERO
+=========================== */
+
+.hero{
+
+    min-height:80vh;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.hero-title{
+
+    font-size:70px;
+
+    font-weight:900;
+
+    line-height:1;
+
+}
+
+.hero-title span{
+
+    color:#F59E0B;
+
+}
+
+.hero-sub{
+
+    margin-top:20px;
+
+    font-size:20px;
+
+    color:#4B5563;
+
+    max-width:550px;
+
+}
+
+.hero-btn{
+
+    background:#111827;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    margin-top:25px;
+
+}
+
+.hero-btn:hover{
+
+    background:black;
+
+    color:white;
+
+}
+
+.hero-btn2{
+
+    background:white;
+
+    color:#111827;
+
+    border:1px solid #ccc;
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    margin-top:25px;
+
+    margin-left:15px;
+
+}
+
+.hero-btn2:hover{
+
+    background:#f3f3f3;
+
+}
+
+.hero-image{
+
+    width:100%;
+
+    max-width:650px;
+
+    border-radius:18px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+/* ===========================
+FEATURES
+=========================== */
+
+.feature-section{
+
+    padding:70px 0;
+
+}
+
+.feature-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.feature-icon{
+
+    font-size:42px;
+
+    color:#F59E0B;
+
+    margin-bottom:15px;
+
+}
+
+.feature-card h5{
+
+    font-weight:700;
+
+}
+
+/* ===========================
+SECTION TITLE
+=========================== */
+
+.section-title{
+
+    text-align:center;
+
+    font-size:42px;
+
+    font-weight:800;
+
+    margin-bottom:50px;
+
+}
+
+/* ===========================
+FLASH SALE
+=========================== */
+
+.deal-box{
+
+    background:linear-gradient(135deg,#111827,#2B2B2B);
+
+    color:white;
+
+    border-radius:25px;
+
+    padding:60px;
+
+    text-align:center;
+
+}
+
+.discount{
+
+    font-size:64px;
+
+    color:#F59E0B;
+
+    font-weight:900;
+
+}
+
+.countdown{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:35px;
+
+}
+
+.time-box{
+
+    background:white;
+
+    color:#111827;
+
+    width:95px;
+
+    height:95px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.time-box h2{
+
+    margin:0;
+
+    font-weight:900;
+
+}
+
+/* ===========================
+BEST SELLERS
+=========================== */
+
+.product-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.product-card img{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:contain;
+
+    padding:20px;
+
+}
+
+.ribbon{
+
+    background:#F59E0B;
+
+    color:white;
+
+    padding:8px 15px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    display:inline-block;
+
+}
+
+.price{
+
+    font-size:24px;
+
+    font-weight:800;
+
+}
+
+.rating{
+
+    color:#F59E0B;
+
+}
+
+.cart-btn{
+
+    width:100%;
+
+    background:#111827;
+
+    color:white;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+}
+
+.cart-btn:hover{
+
+    background:black;
+
+}
+
+/* ===========================
+STATISTICS
+=========================== */
+
+.stats-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+}
+
+.stats-card h1{
+
+    color:#F59E0B;
+
+    font-size:55px;
+
+    font-weight:900;
+
+}
+
+/* ===========================
+REVIEWS / ABOUT / CONTACT
+=========================== */
+
+.review-card,
+.blog-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+    height:100%;
+
+}
+
+/* ===========================
+FOOTER
+=========================== */
+
+.footer{
+
+    background:#111827;
+
+    color:white;
+
+    padding:60px 0;
+
+}
+
+.footer a{
+
+    color:#D1D5DB;
+
+    text-decoration:none;
+
+    display:block;
+
+    margin-bottom:10px;
+
+}
+
+.footer a:hover{
+
+    color:#F59E0B;
+
+}
+
+.social-icons i{
+
+    font-size:22px;
+
+    margin-right:15px;
+
+    cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <!-- ===========================
+NAVBAR
+=========================== -->
+
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="/home">
+
+🚗 Automotive Store
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div
+class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav mx-auto">
+
+<li class="nav-item">
+
+<a class="nav-link" href="#home">
+
+Home
+
+</a>
+
+</li>
+
+<li>
+
+<a
+class="dropdown-item"href="/profile-page">
+
+ My Profile
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#flash-sale">
+
+Deals
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#best-sellers">
+
+Best Sellers
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#about">
+
+About
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#contact">
+
+Contact
+
+</a>
+
+</li>
+
+</ul>
+
+<input
+type="text"
+class="form-control search-box"
+placeholder="🔍 Search Parts...">
+
+<a
+href="/wishlist-page"
+class="icon-btn">
+
+❤️
+
+</a>
+
+<a
+href="/cart-page"
+class="icon-btn">
+
+🛒
+
+</a>
+
+<a
+href="/logout"
+class="btn logout-btn">
+
+Logout
+
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- ===========================
+HERO
+=========================== -->
+
+<section
+id="home"
+class="hero">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<h1 class="hero-title">
+
+ENGINEERED
+
+<br>
+
+FOR
+
+<br>
+
+<span>
+
+EXCELLENCE
+
+</span>
+
+</h1>
+
+<p class="hero-sub">
+
+Premium genuine automotive spare parts for
+Cars and Motorcycles.
+
+Search thousands of original products
+with trusted quality and fast delivery.
+
+</p>
+
+<a
+href="/products-page"
+class="btn hero-btn">
+
+Explore Products
+
+</a>
+
+<a
+href="/products-page"
+class="btn hero-btn2">
+
+Shop Now
+
+</a>
+
+</div>
+
+<div class="col-lg-6 text-center">
+
+<img
+src="/images/bmw-hero.jpg"
+class="hero-image">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+FEATURE BAR
+=========================== -->
+
+<section class="feature-section">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-lg-2 col-md-4 col-6">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+✓
+
+</div>
+
+<h5>
+
+Genuine Parts
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-2 col-md-4 col-6">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+🚚
+
+</div>
+
+<h5>
+
+Fast Delivery
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-2 col-md-4 col-6">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+🔒
+
+</div>
+
+<h5>
+
+Secure Payment
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-2 col-md-4 col-6">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+↩
+
+</div>
+
+<h5>
+
+Easy Returns
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-2 col-md-4 col-6">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+🛠
+
+</div>
+
+<h5>
+
+Expert Support
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-2 col-md-4 col-6">
+
+<div class="feature-card">
+
+<div class="feature-icon">
+
+⭐
+
+</div>
+
+<h5>
+
+Premium Quality
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+FLASH SALE
+=========================== -->
+
+<section id="flash-sale" class="py-5">
+
+<div class="container">
+
+<div class="deal-box">
+
+<h5>
+⏳ DEAL OF THE DAY
+</h5>
+
+<h1 class="display-4 fw-bold">
+FLASH SALE
+</h1>
+
+<div class="discount">
+30% - 70% OFF
+</div>
+
+<p class="mt-3">
+Limited time offer on selected automotive parts.
+Grab your deal before time runs out.
+</p>
+
+<div class="countdown">
+
+<div class="time-box">
+<h2 id="hours">03</h2>
+<small>Hours</small>
+</div>
+
+<div class="time-box">
+<h2 id="minutes">45</h2>
+<small>Minutes</small>
+</div>
+
+<div class="time-box">
+<h2 id="seconds">22</h2>
+<small>Seconds</small>
+</div>
+
+</div>
+
+<a href="/products-page" class="btn btn-warning btn-lg mt-4 fw-bold">
+
+Shop Now
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+BEST SELLERS
+=========================== -->
+
+<section id="best-sellers" class="py-5">
+
+<div class="container">
+
+<h2 class="section-title">
+
+⭐ Best Sellers
+
+</h2>
+
+<p class="text-center text-muted mb-5">
+
+Most Ordered Products By Our Customers
+
+</p>
+
+<div
+class="row g-4"
+id="bestSellerProducts">
+
+<div class="col-12 text-center">
+
+<div class="spinner-border text-warning"></div>
+
+<h5 class="mt-3">
+
+Loading Best Sellers...
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+STATISTICS
+=========================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<h2 class="section-title">
+
+📊 Our Achievements
+
+</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card">
+
+<h1>10K+</h1>
+
+<h5>Products</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card">
+
+<h1>500+</h1>
+
+<h5>Brands</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card">
+
+<h1>25K+</h1>
+
+<h5>Customers</h5>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="stats-card">
+
+<h1>24/7</h1>
+
+<h5>Support</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+CUSTOMER REVIEWS
+=========================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<h2 class="section-title">
+💬 Customer Reviews
+</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="review-card">
+
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<p>
+
+Original products with excellent packaging and fast delivery.
+Highly recommended.
+
+</p>
+
+<h5 class="mt-3">
+
+Rahul Sharma
+
+</h5>
+
+<small class="text-muted">
+
+Hyderabad
+
+</small>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="review-card">
+
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<p>
+
+The spare parts were genuine and perfectly fitted my vehicle.
+
+</p>
+
+<h5 class="mt-3">
+
+Arjun Kumar
+
+</h5>
+
+<small class="text-muted">
+
+Bangalore
+
+</small>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="review-card">
+
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<p>
+
+Excellent customer support and affordable pricing.
+
+</p>
+
+<h5 class="mt-3">
+
+Vikram Reddy
+
+</h5>
+
+<small class="text-muted">
+
+Chennai
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ===========================
+ABOUT US
+=========================== -->
+
+<section id="about" class="py-5">
+
+<div class="container">
+
+<div class="blog-card">
+
+<h2 class="section-title">
+
+🚗 About Us
+
+</h2>
+
+<p class="mt-4 fs-5 text-secondary text-center">
+
+Automotive Store is your trusted destination for genuine automotive spare parts and accessories for both cars and motorcycles. We offer a wide range of high-quality engine parts, brake systems, suspension components, electrical parts, filters, lighting, body parts, and accessories from leading brands.
+
+<br><br>
+
+Our mission is to provide reliable products at competitive prices while ensuring fast delivery, secure shopping, and exceptional customer service. Every product is carefully selected to meet industry quality standards, giving customers confidence in every purchase.
+
+<br><br>
+
+Whether you're a vehicle owner, automobile enthusiast, or professional mechanic, Automotive Store is committed to helping you keep your vehicle running safely, smoothly, and efficiently.
+
+</p>
+
+<div class="row mt-5 text-center">
+
+    <div class="col-md-3">
+        <h2>🚗</h2>
+        <h5>500+</h5>
+        <p>Automotive Products</p>
+    </div>
+
+    <div class="col-md-3">
+        <h2>🏍️</h2>
+        <h5>200+</h5>
+        <p>Bike Spare Parts</p>
+    </div>
+
+    <div class="col-md-3">
+        <h2>⭐</h2>
+        <h5>100%</h5>
+        <p>Genuine Quality</p>
+    </div>
+
+    <div class="col-md-3">
+        <h2>🚚</h2>
+        <h5>Fast Delivery</h5>
+        <p>Across India</p>
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+CONTACT
+=========================== -->
+
+<section id="contact" class="py-5">
+
+<div class="container">
+
+<div class="blog-card text-center">
+
+<h2 class="section-title">
+
+📞 Contact Us
+
+</h2>
+
+<h5>
+
+Automotive Store
+
+</h5>
+
+<p>
+
+📧 support@automotivestore.com
+
+</p>
+
+<p>
+
+📞 +91 9959787876
+
+</p>
+
+<p>
+
+📍 Hyderabad, Telangana
+
+</p>
+
+<p>
+
+🕒 Monday - Sunday | 24 × 7 Support
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+FOOTER
+=========================== -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4">
+
+<h3>
+
+🚗 Automotive Store
+
+</h3>
+
+<p>
+
+Premium Genuine Automotive Parts.
+
+</p>
+
+</div>
+
+<div class="col-lg-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<a href="#home">Home</a>
+
+<a href="/products-page">Products</a>
+
+<a href="#flash-sale">Deals</a>
+
+<a href="#about">About</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+<div class="col-lg-4">
+
+<h5>
+
+Follow Us
+
+</h5>
+
+<div class="social-icons">
+
+<i class="fab fa-facebook"></i>
+
+<i class="fab fa-instagram"></i>
+
+<i class="fab fa-linkedin"></i>
+
+<i class="fab fa-youtube"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="text-center">
+
+© 2026 Automotive Store. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+<script>
+
+// ==========================
+// FLASH SALE COUNTDOWN
+// ==========================
+
+let totalSeconds = 3 * 3600 + 45 * 60 + 22;
+
+setInterval(() => {
+
+    if(totalSeconds > 0){
+
+        totalSeconds--;
+
+    }
+
+    const h = Math.floor(totalSeconds / 3600);
+
+    const m = Math.floor((totalSeconds % 3600) / 60);
+
+    const s = totalSeconds % 60;
+
+    document.getElementById("hours").innerText =
+    String(h).padStart(2,'0');
+
+    document.getElementById("minutes").innerText =
+    String(m).padStart(2,'0');
+
+    document.getElementById("seconds").innerText =
+    String(s).padStart(2,'0');
+
+},1000);
+
+
+// ==========================
+// LOAD BEST SELLERS
+// ==========================
+
+async function loadBestSellers(){
+
+    try{
+
+        const response =
+        await fetch("/products/best-sellers");
+
+        const products =
+        await response.json();
+
+        let html = "";
+
+        if(products.length === 0){
+
+            html = `
+
+            <div class="col-12 text-center">
+
+                <h4>
+
+                    No Best Sellers Available
+
+                </h4>
+
+            </div>
+
+            `;
+
+        }
+
+        else{
+
+            products.forEach(product=>{
+
+                html += `
+
+                <div class="col-lg-3 col-md-6 mb-4">
+
+                    <div class="product-card">
+
+                        <div class="ribbon">
+
+                            🏆 BEST SELLER
+
+                        </div>
+
+                        <img
+                        src="/uploads/${product.image}"
+                        class="img-fluid">
+
+                        <div class="p-3">
+
+                            <h5>
+
+                                ${product.name}
+
+                            </h5>
+
+                            <div class="rating">
+
+                                ⭐⭐⭐⭐⭐
+
+                            </div>
+
+                            <div class="price">
+
+                                ₹${Number(product.price).toLocaleString()}
+
+                            </div>
+
+                            <button
+                            class="cart-btn mt-3"
+                            onclick="location.href='/products-page'">
+
+                                View Product
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            });
+
+        }
+
+        document.getElementById("bestSellerProducts").innerHTML =
+        html;
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+loadBestSellers();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

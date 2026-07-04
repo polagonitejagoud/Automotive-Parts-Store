@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Orders Management</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+background:#C8CDD3;
+
+color:#111827;
+
+}
+
+/* NAVBAR */
+
+.custom-navbar{
+
+background:white;
+
+padding:18px 0;
+
+border-bottom:1px solid #E5E7EB;
+
+}
+
+.navbar-brand{
+
+font-size:32px;
+
+font-weight:800;
+
+color:#111827!important;
+
+}
+
+/* PAGE */
+
+.page-title{
+
+font-size:42px;
+
+font-weight:900;
+
+margin-bottom:8px;
+
+}
+
+.page-sub{
+
+color:#6B7280;
+
+margin-bottom:35px;
+
+}
+
+/* SUMMARY */
+
+.summary-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+text-align:center;
+
+transition:.3s;
+
+height:100%;
+
+}
+
+.summary-card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 12px 28px rgba(0,0,0,.15);
+
+}
+
+.summary-card h2{
+
+margin-top:10px;
+
+font-weight:bold;
+
+}
+
+/* TABLE */
+
+.table-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+margin-top:40px;
+
+}
+
+.table thead{
+
+background:#111827;
+
+color:white;
+
+}
+
+.table tbody tr:hover{
+
+background:#F9FAFB;
+
+}
+
+/* SEARCH */
+
+.search-box{
+
+border-radius:30px;
+
+padding:12px 20px;
+
+}
+
+/* BUTTONS */
+
+.black-btn{
+
+background:#111111;
+
+color:white;
+
+border:none;
+
+font-weight:600;
+
+}
+
+.black-btn:hover{
+
+background:black;
+
+color:white;
+
+}
+
+.orange-btn{
+
+background:#F59E0B;
+
+border:none;
+
+color:black;
+
+font-weight:bold;
+
+}
+
+.orange-btn:hover{
+
+background:#FFB020;
+
+}
+
+/* FOOTER */
+
+.footer{
+
+background:#111827;
+
+color:white;
+
+padding:60px 0;
+
+margin-top:80px;
+
+}
+
+.footer p{
+
+color:#D1D5DB;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <!-- ===========================
+        NAVBAR
+=========================== -->
+
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+<div class="container-fluid px-4">
+
+<a
+class="navbar-brand"
+href="/admin-dashboard">
+
+🚗 Automotive Store
+
+</a>
+
+<div>
+
+<a
+href="/admin-dashboard"
+class="btn btn-dark">
+
+← Dashboard
+
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container py-5">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+
+<h1 class="page-title">
+
+📦 Orders Management
+
+</h1>
+
+<p class="page-sub">
+
+Manage customer orders, approvals and cancellations.
+
+</p>
+
+</div>
+
+<button
+class="btn orange-btn"
+onclick="location.reload()">
+
+🔄 Refresh
+
+</button>
+
+</div>
+
+<!-- ===========================
+        SUMMARY CARDS
+=========================== -->
+
+<div class="row g-4">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<h1>📦</h1>
+
+<h2 id="totalOrders">
+
+0
+
+</h2>
+
+<p>
+
+Total Orders
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<h1>⏳</h1>
+
+<h2 id="pendingOrders">
+
+0
+
+</h2>
+
+<p>
+
+Pending
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<h1>✅</h1>
+
+<h2 id="approvedOrders">
+
+0
+
+</h2>
+
+<p>
+
+Approved
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6">
+
+<div class="summary-card">
+
+<h1>❌</h1>
+
+<h2 id="cancelledOrders">
+
+0
+
+</h2>
+
+<p>
+
+Cancelled
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+        ORDERS TABLE
+=========================== -->
+
+<div class="table-card">
+
+<div class="row mb-4">
+
+<div class="col-md-6">
+
+<input
+type="text"
+id="searchOrder"
+class="form-control search-box"
+placeholder="🔍 Search customer or Order ID">
+
+</div>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="table table-hover align-middle">
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- Part 3 Starts Here -->
+ <script>
+
+let allOrders = [];
+
+/* ===========================
+        LOAD ORDERS
+=========================== */
+
+fetch("/admin/orders")
+
+.then(res => res.json())
+
+.then(data => {
+
+    allOrders = data;
+
+    loadOrders(data);
+
+});
+
+/* ===========================
+        DISPLAY ORDERS
+=========================== */
+
+function loadOrders(data){
+
+    let html = "";
+
+    let pending = 0;
+    let approved = 0;
+    let cancelled = 0;
+
+    data.forEach(order => {
+
+        let badge = "";
+
+switch(order.status){
+
+    case "Pending":
+        pending++;
+        badge = `<span class="badge bg-warning text-dark">Pending</span>`;
+        break;
+
+    case "Approved":
+        approved++;
+        badge = `<span class="badge bg-primary">Approved</span>`;
+        break;
+
+    case "Packed":
+        badge = `<span class="badge bg-info text-dark">Packed</span>`;
+        break;
+
+    case "Shipped":
+        badge = `<span class="badge bg-secondary">Shipped</span>`;
+        break;
+
+    case "Delivered":
+        badge = `<span class="badge bg-success">Delivered</span>`;
+        break;
+
+    case "Cancelled":
+        cancelled++;
+        badge = `<span class="badge bg-danger">Cancelled</span>`;
+        break;
+
+    default:
+        badge = `<span class="badge bg-dark">${order.status}</span>`;
+}
+
+            
+
+        html += `
+
+        <tr>
+
+            <td>
+
+                <strong>#${order.id}</strong>
+
+            </td>
+
+            <td>
+
+                ${order.name}
+
+            </td>
+
+            <td>
+
+                ₹${Number(order.total_amount).toFixed(2)}
+
+            </td>
+
+            <td>
+
+                ${badge}
+
+            </td>
+
+            <td>
+
+                ${new Date(order.created_at).toLocaleDateString()}
+
+            </td>
+
+            <td>
+
+<button
+class="btn btn-success btn-sm mb-1"
+onclick="approveOrder(${order.id})">
+
+Approve
+
+</button>
+
+<button
+class="btn btn-info btn-sm mb-1"
+onclick="packOrder(${order.id})">
+
+Pack
+
+</button>
+
+<button
+class="btn btn-primary btn-sm mb-1"
+onclick="shipOrder(${order.id})">
+
+Ship
+
+</button>
+
+<button
+class="btn btn-dark btn-sm mb-1"
+onclick="deliverOrder(${order.id})">
+
+Deliver
+
+</button>
+
+<button
+class="btn btn-danger btn-sm mb-1"
+onclick="cancelOrder(${order.id})">
+
+Cancel
+
+</button>
+
+</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("ordersTable").innerHTML = html;
+
+    document.getElementById("totalOrders").innerText =
+    data.length;
+
+    document.getElementById("pendingOrders").innerText =
+    pending;
+
+    document.getElementById("approvedOrders").innerText =
+    approved;
+
+    document.getElementById("cancelledOrders").innerText =
+    cancelled;
+
+}
+
+/* ===========================
+        SEARCH
+=========================== */
+
+document
+.getElementById("searchOrder")
+.addEventListener("keyup", function(){
+
+    const value =
+    this.value.toLowerCase();
+
+    const filtered =
+
+    allOrders.filter(order =>
+
+        order.name
+        .toLowerCase()
+        .includes(value)
+
+        ||
+
+        String(order.id)
+        .includes(value)
+
+    );
+
+    loadOrders(filtered);
+
+});
+
+/* ===========================
+        UPDATE STATUS
+=========================== */
+
+function approveOrder(id){
+
+    fetch("/admin/approve/"+id,{
+        method:"PUT"
+    })
+    .then(res=>res.text())
+    .then(msg=>{
+        alert(msg);
+        location.reload();
+    });
+
+}
+
+function packOrder(id){
+
+    fetch("/admin/pack/"+id,{
+        method:"PUT"
+    })
+    .then(res=>res.text())
+    .then(msg=>{
+        alert(msg);
+        location.reload();
+    });
+
+}
+
+function shipOrder(id){
+
+    fetch("/admin/ship/"+id,{
+        method:"PUT"
+    })
+    .then(res=>res.text())
+    .then(msg=>{
+        alert(msg);
+        location.reload();
+    });
+
+}
+
+function deliverOrder(id){
+
+    fetch("/admin/deliver/"+id,{
+        method:"PUT"
+    })
+    .then(res=>res.text())
+    .then(msg=>{
+        alert(msg);
+        location.reload();
+    });
+
+}
+
+function cancelOrder(id){
+
+    fetch("/admin/cancel/"+id,{
+        method:"PUT"
+    })
+    .then(res=>res.text())
+    .then(msg=>{
+        alert(msg);
+        location.reload();
+    });
+
+}
+
+    
+
+/* ===========================
+        VIEW ORDER
+=========================== */
+
+function viewOrder(id){
+
+    alert("Viewing Order #" + id);
+
+    // Later you can replace this with:
+    // window.location.href="/admin-order-details/"+id;
+
+}
+
+</script>
+
+<!-- Part 4 Starts Here -->
+ <!-- ===========================
+        FOOTER
+=========================== -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4">
+
+<h3>
+
+🚗 Automotive Store
+
+</h3>
+
+<p>
+
+Premium Automotive Parts Management System
+
+</p>
+
+</div>
+
+<div class="col-lg-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<p>
+
+Dashboard
+
+</p>
+
+<p>
+
+Products
+
+</p>
+
+<p>
+
+Orders
+
+</p>
+
+<p>
+
+Reports
+
+</p>
+
+</div>
+
+<div class="col-lg-4">
+
+<h5>
+
+Contact
+
+</h5>
+
+<p>
+
+📍 Hyderabad, India
+
+</p>
+
+<p>
+
+📞 +91 9876543210
+
+</p>
+
+<p>
+
+✉ admin@automotivestore.com
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="text-center mb-0">
+
+© 2026 Automotive Store Admin Panel. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

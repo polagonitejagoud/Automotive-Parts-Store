@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>My Orders</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+background:#C8CDD3;
+
+color:#111827;
+
+overflow-x:hidden;
+
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.custom-navbar{
+
+background:white;
+
+padding:18px 0;
+
+border-bottom:1px solid #e5e7eb;
+
+}
+
+.navbar-brand{
+
+font-size:34px;
+
+font-weight:800;
+
+color:#111827!important;
+
+}
+
+.search-wrapper{
+
+position:relative;
+
+width:420px;
+
+}
+
+.search-wrapper input{
+
+padding-left:45px;
+
+border-radius:30px;
+
+height:46px;
+
+border:1px solid #d1d5db;
+
+}
+
+.search-wrapper i{
+
+position:absolute;
+
+left:18px;
+
+top:15px;
+
+color:#777;
+
+}
+
+.icon-box{
+
+position:relative;
+
+font-size:24px;
+
+cursor:pointer;
+
+margin-left:30px;
+
+}
+
+.badge-count{
+
+position:absolute;
+
+top:-8px;
+
+right:-10px;
+
+background:#111827;
+
+color:white;
+
+width:20px;
+
+height:20px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:11px;
+
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title{
+
+font-size:52px;
+
+font-weight:900;
+
+margin-top:45px;
+
+color:#111827;
+
+}
+
+.page-sub{
+
+font-size:18px;
+
+color:#6B7280;
+
+margin-bottom:35px;
+
+}
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stat-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+text-align:center;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+height:100%;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.stat-card h2{
+
+font-size:36px;
+
+font-weight:bold;
+
+color:#111827;
+
+margin-top:10px;
+
+}
+
+.stat-card p{
+
+color:#6B7280;
+
+margin-bottom:0;
+
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-order{
+
+border-radius:30px;
+
+height:46px;
+
+border:1px solid #d1d5db;
+
+}
+
+.search-order:focus{
+
+box-shadow:none;
+
+border-color:#111827;
+
+}
+
+.filter-select{
+
+height:46px;
+
+border-radius:30px;
+
+}
+
+/* =========================
+   ORDER CARD
+========================= */
+
+.order-card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+transition:.35s;
+
+margin-bottom:25px;
+
+}
+
+.order-card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.order-title{
+
+font-size:26px;
+
+font-weight:700;
+
+color:#111827;
+
+}
+
+.order-date{
+
+color:#6B7280;
+
+}
+
+.order-price{
+
+font-size:34px;
+
+font-weight:bold;
+
+color:#F59E0B;
+
+}
+
+.status{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+font-weight:600;
+
+background:#DCFCE7;
+
+color:#15803D;
+
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.black-btn{
+
+background:#111111;
+
+color:white;
+
+border:none;
+
+font-weight:600;
+
+}
+
+.black-btn:hover{
+
+background:#000;
+
+color:white;
+
+}
+
+.orange-btn{
+
+background:#F59E0B;
+
+border:none;
+
+font-weight:bold;
+
+color:black;
+
+}
+
+.orange-btn:hover{
+
+background:#FFB020;
+
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+background:#111827;
+
+color:white;
+
+margin-top:80px;
+
+padding:60px 0;
+
+}
+
+.footer a{
+
+color:white;
+
+text-decoration:none;
+
+}
+
+.footer a:hover{
+
+color:#F59E0B;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+        NAVBAR
+========================= -->
+
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+<div class="container">
+
+<a
+class="navbar-brand"
+href="/products-page">
+
+🚗 Automotive Store
+
+</a>
+
+<div class="search-wrapper">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="searchOrders"
+class="form-control"
+placeholder="Search Orders...">
+
+</div>
+
+<div class="d-flex align-items-center">
+
+<div
+class="icon-box"
+onclick="location.href='/wishlist-page'">
+
+❤️
+
+<span
+id="wishlistCount"
+class="badge-count">
+
+0
+
+</span>
+
+</div>
+
+<div
+class="icon-box"
+onclick="location.href='/cart-page'">
+
+🛒
+
+<span
+id="cartCount"
+class="badge-count">
+
+0
+
+</span>
+
+</div>
+
+<div class="dropdown ms-4">
+
+<button
+class="btn btn-dark dropdown-toggle"
+data-bs-toggle="dropdown">
+
+👤 Account
+
+</button>
+
+<ul class="dropdown-menu dropdown-menu-end">
+
+<li>
+
+<a
+class="dropdown-item"
+href="/products-page">
+
+Products
+
+</a>
+
+</li>
+
+<li>
+
+<a
+class="dropdown-item"
+href="/wishlist-page">
+
+Wishlist
+
+</a>
+
+</li>
+
+<li>
+
+<a
+class="dropdown-item"
+href="/orders-page">
+
+Orders
+
+</a>
+
+</li>
+
+<li>
+
+<a
+class="dropdown-item"
+href="/logout">
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<h1 class="page-title">
+
+My Orders
+
+</h1>
+
+<p class="page-sub">
+
+Track your purchases and reorder your favourite automotive parts.
+
+</p>
+<!-- =========================
+        STATISTICS
+========================= -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="stat-card">
+
+            <div style="font-size:45px;">📦</div>
+
+            <h2 id="totalOrders">0</h2>
+
+            <p>Total Orders</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="stat-card">
+
+            <div style="font-size:45px;">🚚</div>
+
+            <h2 id="deliveredOrders">0</h2>
+
+            <p>Delivered</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="stat-card">
+
+            <div style="font-size:45px;">⏳</div>
+
+            <h2 id="pendingOrders">0</h2>
+
+            <p>Pending</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="stat-card">
+
+            <div style="font-size:45px;">💰</div>
+
+            <h2 id="totalSpent">₹0</h2>
+
+            <p>Total Spent</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+        SEARCH & FILTER
+========================= -->
+
+<div class="row mb-5">
+
+    <div class="col-lg-8 mb-3">
+
+        <input
+        type="text"
+        id="searchInput"
+        class="form-control search-order"
+        placeholder="🔍 Search Order ID...">
+
+    </div>
+
+    <div class="col-lg-4 mb-3">
+
+        <select
+        id="sortOrders"
+        class="form-select filter-select">
+
+            <option value="latest">
+
+                Latest Orders
+
+            </option>
+
+            <option value="highest">
+
+                Highest Amount
+
+            </option>
+
+            <option value="lowest">
+
+                Lowest Amount
+
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<!-- =========================
+        ORDERS LIST
+========================= -->
+
+<div id="ordersContainer"></div>
+
+</div>
+
+<script>
+
+let allOrders = [];
+
+/* ===========================
+   LOAD ORDERS
+=========================== */
+
+fetch("/orders")
+.then(res => res.json())
+.then(data=>{
+
+    allOrders = data;
+
+    displayOrders(data);
+
+    updateStatistics(data);
+
+});
+
+/* ===========================
+   DISPLAY ORDERS
+=========================== */
+
+function displayOrders(orders){
+
+    let html="";
+
+    orders.forEach(order=>{
+
+        html+=`
+
+        <div class="order-card">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-7">
+
+                    <div class="order-title">
+
+                        Order #AS${order.id}
+
+                    </div>
+
+                    <div class="order-date mt-2">
+
+                        ${new Date(order.created_at).toLocaleDateString()}
+
+                    </div>
+
+                    <div class="mt-3">
+
+                        <span class="status">
+
+                            Pending
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 text-lg-center mt-3 mt-lg-0">
+
+                    <div class="order-price">
+
+    ₹${Number(order.total_amount).toLocaleString("en-IN", {
+        minimumFractionDigits: 2
+    })}
+
+</div>
+
+                </div>
+
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+
+                    <button
+class="btn black-btn w-100"
+onclick="trackOrder(${order.id})">
+
+    Track
+
+</button>
+
+                    <button
+                    class="btn orange-btn w-100"
+
+                    onclick="reorder(${order.id})">
+
+                        Reorder
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    if(orders.length===0){
+
+        html=`
+
+        <div class="text-center py-5">
+
+            <h2>
+
+                No Orders Found
+
+            </h2>
+
+            <a
+            href="/products-page"
+            class="btn orange-btn mt-3">
+
+                Shop Now
+
+            </a>
+
+        </div>
+
+        `;
+
+    }
+
+    document.getElementById("ordersContainer").innerHTML = html;
+
+}
+
+/* ===========================
+   STATISTICS
+=========================== */
+
+function updateStatistics(data){
+
+    let totalSpent = 0;
+
+    data.forEach(order=>{
+
+        totalSpent += Number(order.total_amount);
+
+    });
+
+    document.getElementById("totalOrders").innerText =
+    data.length;
+
+    document.getElementById("pendingOrders").innerText =
+    data.length;
+
+    document.getElementById("deliveredOrders").innerText =
+    0;
+
+    document.getElementById("totalSpent").innerText =
+    "₹"+totalSpent.toFixed(2);
+
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+
+document
+.getElementById("searchInput")
+.addEventListener("keyup",function(){
+
+    const value=this.value.toLowerCase();
+
+    const filtered=
+
+    allOrders.filter(order=>
+
+        ("AS"+order.id)
+
+        .toLowerCase()
+
+        .includes(value)
+
+    );
+
+    displayOrders(filtered);
+
+});
+
+/* ===========================
+   SORT
+=========================== */
+
+document
+.getElementById("sortOrders")
+.addEventListener("change",function(){
+
+    let sorted=[...allOrders];
+
+    if(this.value==="highest"){
+
+        sorted.sort((a,b)=>
+
+            b.total_amount-a.total_amount
+
+        );
+
+    }
+
+    else if(this.value==="lowest"){
+
+        sorted.sort((a,b)=>
+
+            a.total_amount-b.total_amount
+
+        );
+
+    }
+
+    else{
+
+        sorted.sort((a,b)=>
+
+            b.id-a.id
+
+        );
+
+    }
+
+    displayOrders(sorted);
+
+});
+
+/* ===========================
+   REORDER
+=========================== */
+
+function trackOrder(orderId){
+
+    window.location.href =
+        "/tracking-page?order=" + orderId;
+
+}
+/* ===========================
+   BADGES
+=========================== */
+
+loadWishlistCount();
+
+loadCartCount();
+
+function loadWishlistCount(){
+
+    fetch("/wishlist")
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        document.getElementById("wishlistCount").innerText =
+        data.length;
+
+    });
+
+}
+
+function loadCartCount(){
+
+    fetch("/cart")
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        let count=0;
+
+        data.forEach(item=>{
+
+            count += Number(item.quantity);
+
+        });
+
+        document.getElementById("cartCount").innerText =
+        count;
+
+    });
+
+}
+
+</script>
+
+<!-- Footer will be added in Part 4 -->
+
+<!-- =========================
+        FOOTER
+========================= -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4 mb-4">
+
+<h3>
+
+🚗 Automotive Store
+
+</h3>
+
+<p>
+
+Premium Automotive Parts
+for Cars & Motorcycles.
+
+</p>
+
+</div>
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<p>
+
+<a href="/products-page">
+
+Products
+
+</a>
+
+</p>
+
+<p>
+
+<a href="/cart-page">
+
+Cart
+
+</a>
+
+</p>
+
+<p>
+
+<a href="/wishlist-page">
+
+Wishlist
+
+</a>
+
+</p>
+
+<p>
+
+<a href="/orders-page">
+
+Orders
+
+</a>
+
+</p>
+
+</div>
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Contact
+
+</h5>
+
+<p>
+
+📍 Hyderabad, India
+
+</p>
+
+<p>
+
+📞 +91 9876543210
+
+</p>
+
+<p>
+
+✉ support@automotivestore.com
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="text-center mb-0">
+
+© 2026 Automotive Store. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
