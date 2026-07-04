@@ -1,5 +1,6 @@
 
 const express = require("express");
+const helmet = require("helmet");
 const session = require("express-session");
 const path = require("path");
 
@@ -8,7 +9,7 @@ const isLoggedIn =
 require("./middleware/authMiddleware");
 
 const app = express();
-
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
