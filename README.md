@@ -73,29 +73,6 @@ The Automotive Parts Store is an e-commerce web application designed for selling
 - Express Session
 - bcryptjs
 
----
-
-## 📂 Project Structure
-
-```
-Automotive-Parts-Store
-│
-├── database/
-├── middleware/
-├── public/
-│   ├── css/
-│   ├── images/
-│   ├── js/
-│   └── videos/
-│
-├── routes/
-├── uploads/
-├── views/
-├── app.js
-├── package.json
-├── package-lock.json
-└── README.md
-```
 ## 🏗 System Architecture
 
 ```
@@ -341,6 +318,76 @@ Dashboard
       ├────────► Reports
       │
       └────────► Settings
+```
+---
+
+## 📂 Project Structure
+
+```
+Automotive-Parts-Store
+│
+├── database/
+├── middleware/
+├── public/
+│   ├── css/
+│   ├── images/
+│   ├── js/
+│   └── videos/
+│
+├── routes/
+├── uploads/
+├── views/
+├── app.js
+├── package.json
+├── package-lock.json
+└── README.md
+```
+## 🔁 Application Flow
+
+```
+Client
+   │
+   ▼
+HTML / CSS / JavaScript
+   │
+HTTP Request
+   │
+   ▼
+Express.js Router
+   │
+   ▼
+Middleware
+(Authentication)
+   │
+   ▼
+Business Logic
+   │
+   ▼
+MySQL Database
+   │
+   ▼
+Response
+   │
+   ▼
+Browser
+```
+## 🛡 Authentication Flow
+
+```
+User Login
+     │
+     ▼
+Validate Credentials
+     │
+     ▼
+Password Verification
+(bcrypt)
+     │
+     ▼
+Create Session
+     │
+     ▼
+Access Protected Pages
 ```
 
 ---
